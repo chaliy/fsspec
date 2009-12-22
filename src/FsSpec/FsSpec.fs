@@ -12,7 +12,7 @@ type Result =
    
 type Spec = 
     abstract Result : Result
-    abstract Description : string   
+    abstract Description : string
 
 [<AutoOpen>]
 module SpecHelpers =
@@ -21,12 +21,13 @@ module SpecHelpers =
          match r with
             | Result.Pass      -> "OK"
             | Result.Fail msg  -> msg
-            | Result.Error msg -> msg      
+            | Result.Error msg -> msg   
 
     let describe desc (specs: Spec seq) =
-        printfn "%s" desc
+        printfn desc
         specs   
         |> Seq.iter (fun (x) -> printfn "\t- %s - %s" x.Description (resultString x.Result))   
+        printfn "\r\n"
 
     let it desc (f: unit -> unit) =
         let executionResult =
@@ -46,3 +47,11 @@ module SpecHelpers =
       member x.should_be_equal_to expected =
         if x <> expected then
            raise (AssertFailed(sprintf "Not really equal. Expected to be %s, but was %s" (expected.ToString()) (x.ToString())))    
+
+
+//           let throw_exception<'a when 'a :> exn> actual =
+//  Assert.Throws<'a>(Assert.ThrowsDelegate(actual))
+//
+//let throws_exception() : unit =
+//  raise(System.ArgumentException "Bad things")
+// http://weblogs.asp.net/podwysocki/archive/2008/06/04/language-oriented-programming-and-functional-unit-testing-in-f.aspx
