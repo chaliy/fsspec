@@ -3,7 +3,7 @@
 
 exception AssertFailed of string
 
-// Struvtures to hold execution state...    
+// Structures to hold execution state...    
 
 type Result =
         | Pass
@@ -41,8 +41,8 @@ module SpecHelpers =
             member this.Result = executionResult
             member this.Description = desc }       
 
-    // Helpers...
+    // Asserts...
     type System.Object with       
-      member x.is_equal_to expected =
+      member x.should_be_equal_to expected =
         if x <> expected then
-           raise (AssertFailed("Not really"))
+           raise (AssertFailed(sprintf "Not really equal. Expected to be %s, but was %s" (expected.ToString()) (x.ToString())))    
