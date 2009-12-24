@@ -1,9 +1,6 @@
 ﻿namespace FsSpec
 
-
 exception AssertFailed of string
-
-// Structures to hold execution state...    
 
 type Result =
         | Pass

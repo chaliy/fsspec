@@ -46,11 +46,6 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Numerics" />
-    <ProjectReference Include="..\FsSpec\FsSpec.fsproj">
-      <Name>FsSpec</Name>
-      <Project>{a0bbc22a-16ca-46b5-abc8-accb7b1abaa6}</Project>
-      <Private>True</Private>
-    </ProjectReference>
   </ItemGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
 	     Other similar extension points exist, see Microsoft.Common.targets.
