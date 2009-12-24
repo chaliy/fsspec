@@ -3,26 +3,26 @@
 open FsSpec
 open Example.Sut
 
-    do describe "Devide opertion for the Calculator" [        
+do describe "Devide opertion for the Calculator" [        
 
-        it "should devide two integers" (fun unit -> 
+    it "should devide two integers" (fun unit -> 
 
-            let res = Calc.Div 2 2
+        let res = Calc.Div 2 2
 
-            res.should_be_equal_to 1
-        );
-        
-        it "should devide two integers (Unexpected Failure)" (fun unit -> 
+        res.should_be_equal_to 1
+    );
 
-            let res = Calc.Div 2 0
+    it "should devide two integers (Unexpected Failure)" (fun unit -> 
 
-            res.should_be_equal_to 1
-        );
+        let res = Calc.Div 2 0
 
-        it "should devide two integers (Unmet Exepectations)" (fun unit -> 
+        res.should_be_equal_to 1
+    );
 
-            let res = Calc.DivEx 2 2
+    it "should devide two integers (Unmet Exepectations)" (fun unit -> 
 
-            res.should_be_equal_to 1
-        );
-    ]
+        let res = Calc.DivEx 2 2
+
+        res.should_be_equal_to 1
+    );
+]
