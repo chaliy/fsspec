@@ -3,7 +3,7 @@
 open FsSpec
 open Example.Sut
 
-let ``Describe simple divide opertion`` =
+let ``Describe simple divide opertion`` =    
 
     it "should divide two integers" (fun unit -> 
 
