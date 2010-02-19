@@ -1,14 +1,12 @@
-﻿#load "References.fsx"
+﻿module ``Calculator Add Operation Specification``
 
 open FsSpec
-open Example.Sut
+open Example.Sut    
 
-do describe "Add opertaion of the Calculator" (fun unit ->
-        
+let ``Describe simple add cases`` = 
     it "should add two integers" (fun unit -> 
 
         let res = Calc.Add 2 2
 
         res.should_be_equal_to 4
-    );
-)
+    )

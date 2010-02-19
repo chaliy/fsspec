@@ -3,7 +3,7 @@
 open FsSpec
 open Example.Sut
 
-do describe "Devide opertion for the Calculator" [        
+do describe "Devide opertion for the Calculator" (fun unit ->     
 
     it "should devide two integers" (fun unit -> 
 
@@ -25,4 +25,4 @@ do describe "Devide opertion for the Calculator" [
 
         res.should_be_equal_to 1
     );
-]
+)

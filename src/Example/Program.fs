@@ -1,5 +1,4 @@
-﻿module Example
-open FsSpec
+﻿open FsSpec
 
 // System Under Test 
 module Calc =
@@ -13,32 +12,32 @@ module Calc =
         i1 + 1 / i2
 
 // Tests...
-do describe "Calculator" [        
-        it "should add two integers" (fun unit -> 
+do describe "Calculator" (fun unit ->
+    it "should add two integers" (fun unit ->
+        
+        let res = Calc.Add 2 2
 
-            let res = Calc.Add 2 2
+        res.should_be_equal_to 4
+    )
 
-            res.should_be_equal_to 4
-        );
+    it "should devide two integers" (fun unit -> 
 
-        it "should devide two integers" (fun unit -> 
+        let res = Calc.Div 2 2
 
-            let res = Calc.Div 2 2
+        res.should_be_equal_to 1
+    )
 
-            res.should_be_equal_to 1
-        );
+    it "should devide two integers (Unexpected Failure)" (fun unit -> 
 
-        it "should devide two integers (Unexpected Failure)" (fun unit -> 
+        let res = Calc.Div 2 0
 
-            let res = Calc.Div 2 0
+        res.should_be_equal_to 1
+    )
 
-            res.should_be_equal_to 1
-        );
+    it "should devide two integers (Unmet Exepectations)" (fun unit -> 
 
-        it "should devide two integers (Unmet Exepectations)" (fun unit -> 
+        let res = Calc.DivEx 2 2
 
-            let res = Calc.DivEx 2 2
-
-            res.should_be_equal_to 1
-        );
-    ]
+        res.should_be_equal_to 1
+    )
+)
