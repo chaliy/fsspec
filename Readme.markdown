@@ -73,7 +73,7 @@ And finally third example. You can find it in `src/CompiledSuiteExample`. It des
 
 ## References
 
-Introduction post (outdated) - [FsSpec: Introducing yet another Unit Testing/BDD framework for F#][http://chaliy.name/blog/2009/12/introducing_fsspec]
+Introduction post (outdated) - [FsSpec: Introducing yet another Unit Testing/BDD framework for F#][1]
 
 ## Roadmap
 
@@ -81,3 +81,5 @@ Introduction post (outdated) - [FsSpec: Introducing yet another Unit Testing/BDD
 2. Remove dependency to PowerPack;
 3. New asserions and possible new syntax;
 4. Colored output;
+
+[1]: http://chaliy.name/blog/2009/12/introducing_fsspec
