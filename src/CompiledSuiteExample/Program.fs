@@ -1,3 +1,3 @@
 ﻿open FsSpec
 
-do Runner.Run()
+do Runner.Run3()
