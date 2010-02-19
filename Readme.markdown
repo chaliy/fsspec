@@ -1,3 +1,5 @@
+# FsSpec
+
 *FsSpec* is about writing executable specs in F#. Main intent is to provide readable DSL. Hope this tool will be able to achieve this. 
 
 ## Syntax
@@ -48,16 +50,16 @@ Another syntax is:
 
 There are two scenarious, first is to write specs as simple app. Thou runnig specs means run app:
 
-    1. Reference FsSpec.dll
-    2. Write specification
+1. Reference FsSpec.dll
+2. Write specification
 	
 You can find example of this usage in `src/Example` or `src/SuiteExample`.
 	
 Another option is to use built-in runner
 
-	1. Reference FsSpec.dll
-    2. Write specifications
-	3. Add Runner.Run() to your main method	
+1. Reference FsSpec.dll
+2. Write specifications
+3. Add Runner.Run() to your main method	
 	
 Example of this usage located in `src/CompiledSuiteExample`.
 
@@ -73,4 +75,4 @@ And finally third example. You can find it in `src/CompiledSuiteExample`. It des
 
 ## References
 
-Introduction post (outdated) - [FsSpec: Introducing yet another Unit Testing/BDD framework for F#]<http://chaliy.name/blog/2009/12/introducing_fsspec>
+Introduction post (outdated) - [FsSpec: Introducing yet another Unit Testing/BDD framework for F#][http://chaliy.name/blog/2009/12/introducing_fsspec]
