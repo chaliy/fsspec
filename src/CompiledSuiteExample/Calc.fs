@@ -1,7 +1,5 @@
-﻿namespace Example.Sut
-
-// System Under Test
-module Calc =
+﻿// System Under Test
+module Calc
     
     let Add i1 i2 = 
         i1 + i2

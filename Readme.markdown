@@ -28,18 +28,16 @@ Another syntax is:
 
     module ``Calculator Specification``
 
-    open FsSpec
-    open Example.Sut
+    open FsSpec    
 
-    let ``Describe simple opertions`` =    
+    module ``Describe simple opertions`` = 
 
-        it "should add two integers" (fun unit -> 
-
+        let ``add two integers`` = spec {
             let res = Calc.Add 2 2
             res.should_be_equal_to 4
-        )
+        }
 
-        it "should devide two integers" (fun unit -> 
+        let "devide two integers`` = spec {
 
             let res = Calc.Div 2 2
             res.should_be_equal_to 1
@@ -59,7 +57,7 @@ Another option is to use built-in runner
 
 1. Reference FsSpec.dll
 2. Write specifications
-3. Add Runner.Run() to your main method	
+3. Add FsSpec.Runner.Run() to your main method	
 	
 Example of this usage located in `src/CompiledSuiteExample`.
 
@@ -76,3 +74,10 @@ And finally third example. You can find it in `src/CompiledSuiteExample`. It des
 ## References
 
 Introduction post (outdated) - [FsSpec: Introducing yet another Unit Testing/BDD framework for F#][http://chaliy.name/blog/2009/12/introducing_fsspec]
+
+## Roadmap
+
+1. TeamCity integration;
+2. Remove dependency to PowerPack;
+3. New asserions and possible new syntax;
+4. Colored output;
