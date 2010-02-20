@@ -5,11 +5,13 @@ exception AssertFailed of string
 [<AutoOpen>]
 module SpecHelpers =
            
+    /// Sub topic of the spec, aggregate spec clauses
     let describe desc (f: unit -> unit) =
         printfn "%s" desc
         f()  
         printfn "\r\n"
             
+    /// Describe single spec clause
     let it desc (f: unit -> unit) =        
         try
            do f()
@@ -20,13 +22,14 @@ module SpecHelpers =
 
     // Spec Builder
 
+    /// Specification
     type Spec = unit -> unit    
      
     type SpecBuilder() =
                 
         member b.Delay(f : unit -> Spec) = (fun() -> f()())
         member b.Zero() = (fun() -> ())
-
+    
     let spec = new SpecBuilder()
 
     // Asserts...
@@ -51,6 +54,7 @@ module SpecHelpers =
 //  raise(System.ArgumentException "Bad things")
 // http://weblogs.asp.net/podwysocki/archive/2008/06/04/language-oriented-programming-and-functional-unit-testing-in-f.aspx
 
+/// All about running specs
 module Runner =
     open System.Reflection    
     open Microsoft.FSharp.Metadata
@@ -59,6 +63,7 @@ module Runner =
             let sep = (new System.String('-', title.Length + 4))
             printfn "\r\n%s\r\n  %s  \r\n%s\r\n"  sep title sep 
 
+    /// Runs all specs in executing assembly.
     let Run() =
         let runTest (spec : Spec) =
             try                                
