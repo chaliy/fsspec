@@ -33,7 +33,7 @@ module SpecHelpers =
     let spec = new SpecBuilder()
 
     // Asserts...
-    type System.Object with       
+    type System.Object with
       member x.should_be_equal_to expected =
         if x <> expected then
            raise (AssertFailed(sprintf "Not really equal. Expected to be %s, but was %s" (expected.ToString()) (x.ToString())))    
@@ -44,7 +44,14 @@ module SpecHelpers =
 
       member x.should_be_null =
         if obj.Equals(x, null) = false then
-           raise (AssertFailed(sprintf "Damn! It does not NULL"))    
+           raise (AssertFailed(sprintf "Damn! It does not NULL"))
+
+
+    let should_fail (s : unit -> unit) =
+        try
+           do s()
+           raise (AssertFailed(sprintf "Nothing failed!"))
+        with | _ -> () 
 
 
 //           let throw_exception<'a when 'a :> exn> actual =

@@ -8,10 +8,13 @@ module ``Describe simple divide opertion`` =
         res.should_be_equal_to 1    
     }
 
-
     let ``divide by zero (Unexpected Failure)`` = spec {
         let res = Calc.Div 2 0
         res.should_be_equal_to 1
+    }
+
+    let ``fail when divide by zero`` = spec {
+        should_fail (fun () -> ignore(Calc.Div 2 0))                
     }
     
     let ``do extended divide with two integers (Unmet Exepectations)`` = spec {
