@@ -46,6 +46,15 @@ module SpecHelpers =
         if obj.Equals(x, null) = false then
            raise (AssertFailed(sprintf "Damn! It does not NULL"))
 
+    type System.Boolean with        
+        member x.should_be_true =
+            if (x <> true) then
+                raise (AssertFailed(sprintf "TRUE is expected."))
+
+        member x.should_be_false =
+            if (x <> false) then
+                raise (AssertFailed(sprintf "FALSE is expected."))
+
 
     let should_fail (s : unit -> unit) =
         try
@@ -53,13 +62,8 @@ module SpecHelpers =
            raise (AssertFailed(sprintf "Nothing failed!"))
         with | _ -> () 
 
+    
 
-//           let throw_exception<'a when 'a :> exn> actual =
-//  Assert.Throws<'a>(Assert.ThrowsDelegate(actual))
-//
-//let throws_exception() : unit =
-//  raise(System.ArgumentException "Bad things")
-// http://weblogs.asp.net/podwysocki/archive/2008/06/04/language-oriented-programming-and-functional-unit-testing-in-f.aspx
 
 /// All about running specs
 module Runner =
