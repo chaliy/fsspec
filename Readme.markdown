@@ -92,5 +92,3 @@ Introduction post (outdated) - [FsSpec: Introducing yet another Unit Testing/BDD
 [1]: http://chaliy.name/blog/2009/12/introducing_fsspec
 [FsUnit]: http://code.google.com/p/fsunit/
 [FsCheck]: http://fscheck.codeplex.com/
-*[DSL]: Domain Specific language
-*[F#]: Microsoft F#
