@@ -42,6 +42,8 @@ Another syntax is:
             let res = Calc.Div 2 2
             res.should_be_equal_to 1
         )
+		
+I think second syntax eventually becomes main.
 
 
 ## Usage
@@ -65,15 +67,20 @@ Example of this usage located in `src/CompiledSuiteExample`.
 
 There are three examples come out of the box. 
 
-First one is located at `\src\Example\`, this is simple compiled spec. To run this spec, compile and run as regular command line app.
+First one is located at `/src/Example`, this is simple compiled spec. To run this spec, compile and run as regular command line app.
 
-Second example on the other hand is implemented as bunch of F# scripts. You can find it at `\src\SuiteExample\`. Because of nature of the script, you do not have to compile it. Just execute Run.cmd. Should work.
+Second example on the other hand is implemented as bunch of F# scripts. You can find it at `/src/SuiteExample`. Because of nature of the script, you do not have to compile it. Just execute Run.cmd. Should work.
 
 And finally third example. You can find it in `src/CompiledSuiteExample`. It describe specification that could be runned with built-in runner.
 
 ## References
 
 Introduction post (outdated) - [FsSpec: Introducing yet another Unit Testing/BDD framework for F#][1]
+
+## Other simmilar tools
+
+1. [FsUnit][FsUnit] - is native F# DSL around existing .NET unit-testing frameworks;
+2. [FsCheck][FsCheck] - is a F# port of Haskell's QuickCheck;
 
 ## Roadmap
 
@@ -83,3 +90,7 @@ Introduction post (outdated) - [FsSpec: Introducing yet another Unit Testing/BDD
 4. Colored output;
 
 [1]: http://chaliy.name/blog/2009/12/introducing_fsspec
+[FsUnit]: http://code.google.com/p/fsunit/
+[FsCheck]: http://fscheck.codeplex.com/
+*[DSL]: Domain Specific language
+*[F#]: Microsoft F#
