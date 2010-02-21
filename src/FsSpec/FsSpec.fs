@@ -34,17 +34,18 @@ module SpecHelpers =
 
     // Asserts...
     type System.Object with
-      member x.should_be_equal_to expected =
-        if x <> expected then
-           raise (AssertFailed(sprintf "Not really equal. Expected to be %s, but was %s" (expected.ToString()) (x.ToString())))    
 
-      member x.should_not_be_null =                
-        if obj.Equals(x, null) then
-           raise (AssertFailed(sprintf "Bumm, unexpected NULL"))    
+        member x.should_be_equal_to expected =
+            if x <> expected then
+                raise (AssertFailed(sprintf "Not really equal. Expected to be %s, but was %s" (expected.ToString()) (x.ToString())))    
 
-      member x.should_be_null =
-        if obj.Equals(x, null) = false then
-           raise (AssertFailed(sprintf "Damn! It does not NULL"))
+        member x.should_not_be_null =                
+            if obj.Equals(x, null) then
+                raise (AssertFailed(sprintf "Bumm, unexpected NULL"))    
+
+        member x.should_be_null =
+            if obj.Equals(x, null) = false then
+                raise (AssertFailed(sprintf "Damn! It does not NULL"))
 
     type System.Boolean with        
         member x.should_be_true =
