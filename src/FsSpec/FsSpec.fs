@@ -29,6 +29,7 @@ module SpecHelpers =
                 
         member b.Delay(f : unit -> Spec) = (fun() -> f()())
         member b.Zero() = (fun() -> ())
+        member b.Using(g : System.IDisposable, e) = () // Ignore for now... TODO Really need this!
     
     let spec = new SpecBuilder()
 
@@ -56,6 +57,22 @@ module SpecHelpers =
             if (x <> false) then
                 raise (AssertFailed(sprintf "FALSE is expected."))
 
+    type System.Collections.Generic.IEnumerable<'T> with        
+        member x.should_not_be_empty =
+            if x |> Seq.isEmpty then
+                raise (AssertFailed(sprintf "Non empty sequence is expected."))
+
+        member x.should_be_empty =
+            if not (x |> Seq.isEmpty) then
+                raise (AssertFailed(sprintf "Empty sequence is expected."))
+
+        member x.should_has_items_of e =
+            let size = x |> Seq.length
+            if size <> e then
+                raise (AssertFailed(sprintf "Sequence expected to have %i items. But was %i" e size))
+
+    let justfail() =
+        raise (AssertFailed(sprintf "Just failed!"))
 
     let should_fail (s : unit -> unit) =
         try
