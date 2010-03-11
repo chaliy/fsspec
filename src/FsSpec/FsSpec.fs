@@ -87,10 +87,20 @@ module SpecHelpers =
 module Runner =
     open System.Reflection    
     open Microsoft.FSharp.Metadata
+    open Microsoft.FSharp.Reflection
+    open System.Text.RegularExpressions
 
     let internal printTitle (title : string) = 
             let sep = (new System.String('-', title.Length + 4))
             printfn "\r\n%s\r\n  %s  \r\n%s\r\n"  sep title sep 
+
+    let specRegex = Regex("Spec", RegexOptions.Compiled 
+                                  ||| RegexOptions.IgnoreCase
+                                  ||| RegexOptions.CultureInvariant )
+
+    let descRegex = Regex("Describe", RegexOptions.Compiled 
+                                      ||| RegexOptions.IgnoreCase
+                                      ||| RegexOptions.CultureInvariant )
 
     /// Runs all specs in executing assembly.
     let Run() =
@@ -104,24 +114,20 @@ module Runner =
         
 
         let asm = System.Reflection.Assembly.GetEntryAssembly()                    
-        let fasm = FSharpAssembly.FromAssembly(asm)
-        fasm.Entities
-                    |> Seq.filter(fun e -> e.IsModule)
-                    |> Seq.filter(fun e -> e.LogicalName.Contains("Spec"))                    
-                    |> Seq.filter(fun e -> ( printTitle e.CompiledName ; true ) )
-                    |> Seq.collect(fun e -> e.NestedEntities)
-                    |> Seq.filter(fun e -> e.IsModule)
-                    |> Seq.filter(fun e -> e.LogicalName.Contains("Describe"))
-                    |> Seq.filter(fun e -> ( printfn "\r\n\t%s\r\n" e.CompiledName ; true ) )
-                    |> Seq.collect(fun e -> e.MembersOrValues) 
-                    |> Seq.map(fun m -> (m, (match m.ReflectionMemberInfo with
-                                               | :? PropertyInfo as p -> Some(p.GetValue(null, null))
-                                               | :? MethodInfo as m -> Some(m.Invoke(null, null))
-                                               | _ -> None)))                    
-                    |> Seq.filter(fun (_ , s) -> s.IsSome) 
-                    |> Seq.map(fun (m, s) -> (m, (match s.Value with
-                                                    | :? Spec as spec -> Some(spec)
-                                                    | _ -> None )))
-                    |> Seq.filter(fun (_ , s) -> s.IsSome) 
-                    |> Seq.filter(fun (m, _) -> ( printf "\t\t- Should %s - " m.CompiledName ; true ) )
-                    |> Seq.iter(fun (_, s) -> runTest s.Value)         
+        asm.GetTypes()
+        |> Seq.filter(fun t -> (FSharpType.IsModule t) && specRegex.IsMatch(t.Name))
+        |> Seq.filter(fun t -> ( printTitle t.Name ; true ) )
+        |> Seq.collect(fun t -> t.GetNestedTypes())   
+        |> Seq.filter(fun t -> (FSharpType.IsModule t) && descRegex.IsMatch(t.Name))
+        |> Seq.filter(fun t -> ( printfn "\r\n\t%s\r\n" t.Name ; true ) )
+        |> Seq.collect(fun t -> t.GetMembers())   
+        |> Seq.filter(function
+                      | :? PropertyInfo as p -> p.PropertyType = typeof<Spec>
+                      | :? MethodInfo as m -> m.ReturnType = typeof<Spec>
+                      | _ -> false )
+        |> Seq.map(fun m -> (m, (match m with
+                                 | :? PropertyInfo as p -> Some(p.GetValue(null, null) :?> Spec)
+                                 | :? MethodInfo as m -> Some(m.Invoke(null, null) :?> Spec)
+                                 | _ -> None)))                    
+        |> Seq.filter(fun (m, _) -> ( printf "\t\t- Should %s - " m.Name ; true ) )
+        |> Seq.iter(fun (_, s) -> runTest s.Value)

@@ -35,9 +35,6 @@
     <Compile Include="FsSpec.fs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="FSharp.PowerPack.Metadata">
-      <HintPath>..\..\lib\PowerPack\FSharp.PowerPack.Metadata.dll</HintPath>
-    </Reference>
     <Reference Include="mscorlib" />
     <Reference Include="FSharp.Core" />
     <Reference Include="System" />
