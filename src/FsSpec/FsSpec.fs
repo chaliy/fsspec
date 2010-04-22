@@ -81,16 +81,13 @@ module SpecHelpers =
         with | _ -> () 
 
     
-
-
 /// All about running specs
 module Runner =
-    open System.Reflection    
-    open Microsoft.FSharp.Metadata
+    open System.Reflection        
     open Microsoft.FSharp.Reflection
     open System.Text.RegularExpressions
 
-    let internal printTitle (title : string) = 
+    let internal printTitle (title : string) =     
             let sep = (new System.String('-', title.Length + 4))
             printfn "\r\n%s\r\n  %s  \r\n%s\r\n"  sep title sep 
 
@@ -125,6 +122,7 @@ module Runner =
                       | :? PropertyInfo as p -> p.PropertyType = typeof<Spec>
                       | :? MethodInfo as m -> m.ReturnType = typeof<Spec>
                       | _ -> false )
+        |> Seq.filter(fun m -> m.Name.StartsWith("get"))
         |> Seq.map(fun m -> (m, (match m with
                                  | :? PropertyInfo as p -> Some(p.GetValue(null, null) :?> Spec)
                                  | :? MethodInfo as m -> Some(m.Invoke(null, null) :?> Spec)
